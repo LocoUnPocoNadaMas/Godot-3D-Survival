@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cks2h6hgumt6m"]
+
+[ext_resource type="PackedScene" uid="uid://bagbh3j4pvw7w" path="res://Assets/Prefabs/terrain.tscn" id="1_8kwb1"]
+[ext_resource type="PackedScene" uid="uid://ckp87ltvhpeov" path="res://Assets/Prefabs/player.tscn" id="2_6xp4k"]
+
+[node name="Level1" type="Node3D"]
+
+[node name="Terrain" parent="." instance=ExtResource("1_8kwb1")]
+
+[node name="Player" parent="." instance=ExtResource("2_6xp4k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.774519, -0.369599, 0.513339, -0.158494, 0.672257, 0.723153, -0.612372, -0.641457, 0.462097, -5, 10, 5)
+shadow_enabled = true
