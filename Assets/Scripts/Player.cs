@@ -38,25 +38,7 @@ public partial class Player : CharacterBody3D
     {
         _eventBus.EmitSignal(EventBus.SignalName.MoveCamera, _head.GlobalPosition);
     }
-
-    public override void _Input(InputEvent @event)
-    {
-        if (@event is InputEventMouseMotion mouseEvent)
-        {
-            var camRotation = _head.RotationDegrees;
-            // Up and Down
-            camRotation.X += mouseEvent.Relative.Y * _lookSensibility;
-            camRotation.X = Mathf.Clamp(camRotation.X, _minXRotation, _maxXRotation);
-            // Left and Right
-            camRotation.Y += mouseEvent.Relative.X * _lookSensibility;
-            //GD.PrintErr(camRotation.Y);
-            //camRotation.Y = Mathf.Wrap(camRotation.Y, 0, 360); 
-            _head.RotationDegrees = camRotation;
-            // Increase Camera Rotation
-            _eventBus.EmitSignal(EventBus.SignalName.RotateCamera, _head.RotationDegrees);
-        }
-    }
-
+    
     public override void _PhysicsProcess(double delta)
     {
         if (!IsOnFloor())
@@ -78,13 +60,31 @@ public partial class Player : CharacterBody3D
         var input = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 
         var direction = _head.Basis.Z * input.Y + _head.Basis.X * input.X;
-        //direction.Y = 0;
-        //direction = direction.Normalized();
+        direction.Y = 0;
+        direction = direction.Normalized();
 
         var velocity = Velocity;
         velocity.X = direction.X * _moveSpeed;
         velocity.Z = direction.Z * _moveSpeed;
         Velocity = velocity;
         MoveAndSlide();
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (@event is InputEventMouseMotion mouseEvent)
+        {
+            var camRotation = _head.RotationDegrees;
+            // Up and Down
+            camRotation.X += mouseEvent.Relative.Y * _lookSensibility;
+            camRotation.X = Mathf.Clamp(camRotation.X, _minXRotation, _maxXRotation);
+            // Left and Right
+            camRotation.Y += mouseEvent.Relative.X * _lookSensibility;
+            //GD.PrintErr(camRotation.Y);
+            //camRotation.Y = Mathf.Wrap(camRotation.Y, 0, 360); 
+            _head.RotationDegrees = camRotation;
+            // Increase Camera Rotation
+            _eventBus.EmitSignal(EventBus.SignalName.RotateCamera, _head.RotationDegrees);
+        }
     }
 }
