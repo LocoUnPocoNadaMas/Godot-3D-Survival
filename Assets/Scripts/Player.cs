@@ -7,15 +7,9 @@ public partial class Player : CharacterBody3D
     private Camera3D _camera3D;
     private Node3D _head;
 
-    [ExportCategory("Movement")]
-    [Export] private float _moveSpeed = 5f;
+    [ExportCategory("Movement")] [Export] private float _moveSpeed = 5f;
     [Export] private float _jumpForce = 5f;
     private float _gravity = 9.8f;
-
-    [ExportCategory("View Rotation")]
-    [Export] private float _lookSensibility = 0.5f;
-    [Export(PropertyHint.Range, "-85f,-1f,1f")] private float _minXRotation = -85f;
-    [Export(PropertyHint.Range, "1f,85f,1f")] private float _maxXRotation = 85f;
 
     private Vector2 _mouseDirection;
     private EventBus _eventBus;
@@ -25,16 +19,28 @@ public partial class Player : CharacterBody3D
         _eventBus = GetNode<EventBus>("/root/EventBus");
         _head = GetNode<Node3D>("Head");
     }
-    
+
     public override void _Process(double delta)
     {
-        GD.PrintErr(_head.GlobalPosition);
         _eventBus.EmitSignal(EventBus.SignalName.MoveCamera, _head.GlobalPosition);
     }
-    
-    private void _Input()
+
+    public override void _Input(InputEvent @event)
     {
-        
+        if (@event is InputEventMouseMotion mouseEvent)
+        {
+            // Increase Camera Rotation
+            _eventBus.EmitSignal(EventBus.SignalName.RotateCamera, mouseEvent.Relative);
+        }
     }
 
+    public override void _PhysicsProcess(double delta)
+    {
+        var input = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+        var velocity = Velocity;
+        velocity.X = input.X * _moveSpeed;
+        velocity.Z = input.Y * _moveSpeed;
+        Velocity = velocity;
+        MoveAndSlide();
+    }
 }
