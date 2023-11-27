@@ -18,15 +18,18 @@ public partial class Player : CharacterBody3D
     [Export(PropertyHint.Range, "1f,85f,1f")] private float _maxXRotation = 85f;
 
     private Vector2 _mouseDirection;
+    private EventBus _eventBus;
 
     public override void _Ready()
     {
-        base._Ready();
+        _eventBus = GetNode<EventBus>("/root/EventBus");
+        _head = GetNode<Node3D>("Head");
     }
     
     public override void _Process(double delta)
     {
-        base._Process(delta);
+        GD.PrintErr(_head.GlobalPosition);
+        _eventBus.EmitSignal(EventBus.SignalName.MoveCamera, _head.GlobalPosition);
     }
     
     private void _Input()

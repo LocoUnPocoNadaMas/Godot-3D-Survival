@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dirgyjyd3duey"]
+[gd_scene load_steps=3 format=3 uid="uid://dirgyjyd3duey"]
 
 [ext_resource type="PackedScene" uid="uid://cks2h6hgumt6m" path="res://Assets/Scenes/level_1.tscn" id="1_6cyv7"]
+[ext_resource type="Script" path="res://Assets/Scripts/Camera3D.cs" id="1_dipe7"]
 
 [node name="Game" type="Node"]
 
@@ -8,5 +9,6 @@
 
 [node name="Camera3D" type="Camera3D" parent="Level"]
 current = true
+script = ExtResource("1_dipe7")
 
 [node name="Level1" parent="Level" instance=ExtResource("1_6cyv7")]
