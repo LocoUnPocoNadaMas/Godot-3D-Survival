@@ -14,7 +14,6 @@ public partial class Camera3D : Godot.Camera3D
 
     private void OnMovement(Vector3 vector3)
     {
-        GD.PrintErr(vector3);
         Position = vector3;
         //GlobalPosition = vector3;
     }
