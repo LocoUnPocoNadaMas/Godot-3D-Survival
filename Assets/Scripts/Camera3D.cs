@@ -9,11 +9,11 @@ public partial class Camera3D : Godot.Camera3D
     public override void _Ready()
     {
         _eventBus = GetNode<EventBus>("/root/EventBus");
-        _eventBus.MoveCamera += OnMovement;
-        _eventBus.RotateCamera += OnRotation;
+        _eventBus.CameraMove += OnMovement;
+        _eventBus.CameraRotate += OnCameraRotate;
     }
 
-    private void OnRotation(Vector3 vector3)
+    private void OnCameraRotate(Vector3 vector3)
     {
         RotationDegrees = vector3;
     }
@@ -21,6 +21,5 @@ public partial class Camera3D : Godot.Camera3D
     private void OnMovement(Vector3 vector3)
     {
         Position = vector3;
-        //GlobalPosition = vector3;
     }
 }
