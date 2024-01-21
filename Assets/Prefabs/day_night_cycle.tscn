@@ -1,6 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6lvk8knu001c"]
+[gd_scene load_steps=6 format=3 uid="uid://b6lvk8knu001c"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/DayNightCycle.cs" id="1_a43gl"]
+
+[sub_resource type="Gradient" id="Gradient_0en45"]
+offsets = PackedFloat32Array(0, 0.191571, 0.5, 0.7, 1)
+colors = PackedColorArray(1, 0.584314, 0.262745, 1, 0.968627, 0.921569, 0.858824, 1, 1, 1, 1, 1, 0.941176, 0.937255, 0.619608, 1, 0.99, 0.462, 0, 1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3k1gg"]
 sky_top_color = Color(0.207843, 0.529412, 0.717647, 1)
@@ -17,6 +21,7 @@ sky = SubResource("Sky_hwleh")
 
 [node name="DayNightCycle" type="Node3D"]
 script = ExtResource("1_a43gl")
+_sunColor = SubResource("Gradient_0en45")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.774519, -0.369599, 0.513339, -0.158494, 0.672257, 0.723153, -0.612372, -0.641457, 0.462097, -5, 10, 5)
