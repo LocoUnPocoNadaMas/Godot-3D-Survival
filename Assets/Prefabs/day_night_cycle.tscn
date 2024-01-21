@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6lvk8knu001c"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/DayNightCycle.cs" id="1_a43gl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3k1gg"]
+sky_top_color = Color(0.207843, 0.529412, 0.717647, 1)
+sky_horizon_color = Color(0.529412, 0.776471, 0.901961, 1)
+ground_bottom_color = Color(0.207843, 0.529412, 0.717647, 1)
+ground_horizon_color = Color(0.529412, 0.776471, 0.901961, 1)
+
+[sub_resource type="Sky" id="Sky_hwleh"]
+sky_material = SubResource("ProceduralSkyMaterial_3k1gg")
+
+[sub_resource type="Environment" id="Environment_hai60"]
+background_mode = 2
+sky = SubResource("Sky_hwleh")
+
+[node name="DayNightCycle" type="Node3D"]
+script = ExtResource("1_a43gl")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.774519, -0.369599, 0.513339, -0.158494, 0.672257, 0.723153, -0.612372, -0.641457, 0.462097, -5, 10, 5)
+shadow_enabled = true
+
+[node name="Moon" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.774519, -0.369599, 0.513339, -0.158494, 0.672257, 0.723153, -0.612372, -0.641457, 0.462097, -5, 10, 5)
+visible = false
+shadow_enabled = true
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hai60")
