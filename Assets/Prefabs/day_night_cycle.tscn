@@ -1,10 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6lvk8knu001c"]
+[gd_scene load_steps=11 format=3 uid="uid://b6lvk8knu001c"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/DayNightCycle.cs" id="1_a43gl"]
 
 [sub_resource type="Gradient" id="Gradient_0en45"]
 offsets = PackedFloat32Array(0, 0.191571, 0.5, 0.7, 1)
 colors = PackedColorArray(1, 0.584314, 0.262745, 1, 0.968627, 0.921569, 0.858824, 1, 1, 1, 1, 1, 0.941176, 0.937255, 0.619608, 1, 0.99, 0.462, 0, 1)
+
+[sub_resource type="Curve" id="Curve_f7ek4"]
+_data = [Vector2(0.17301, 0), 0.0, 0.0, 0, 0, Vector2(0.3391, 1), 0.0, 0.0, 0, 0, Vector2(0.66782, 1), 0.0, 0.0, 0, 0, Vector2(0.820069, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_l5j30"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.301961, 0.266667, 0.823529, 1)
+
+[sub_resource type="Curve" id="Curve_0kdlf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.283737, 0.0063113), 0.0, 0.0, 0, 0, Vector2(0.747405, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.990884), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_vwpte"]
+offsets = PackedFloat32Array(0.1, 0.4, 0.6, 0.9)
+colors = PackedColorArray(0.317647, 0.333333, 0.65098, 1, 0.184314, 0.87451, 0.878431, 1, 0.184314, 0.87451, 0.878431, 1, 0.317647, 0.333333, 0.65098, 1)
+
+[sub_resource type="Gradient" id="Gradient_u8xql"]
+offsets = PackedFloat32Array(0.1, 0.28, 0.4, 0.6, 0.7, 0.9)
+colors = PackedColorArray(0.317647, 0.333333, 0.65098, 1, 0.87451, 0.521569, 0.333333, 1, 0.184314, 0.87451, 0.878431, 1, 0.184314, 0.87451, 0.878431, 1, 0.87451, 0.521569, 0.333333, 1, 0.317647, 0.333333, 0.65098, 1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3k1gg"]
 sky_top_color = Color(0.207843, 0.529412, 0.717647, 1)
@@ -22,6 +42,11 @@ sky = SubResource("Sky_hwleh")
 [node name="DayNightCycle" type="Node3D"]
 script = ExtResource("1_a43gl")
 _sunColor = SubResource("Gradient_0en45")
+_sunIntensity = SubResource("Curve_f7ek4")
+_moonColor = SubResource("Gradient_l5j30")
+_moonIntensity = SubResource("Curve_0kdlf")
+_skyTopColor = SubResource("Gradient_vwpte")
+_skyHorizonColor = SubResource("Gradient_u8xql")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.774519, -0.369599, 0.513339, -0.158494, 0.672257, 0.723153, -0.612372, -0.641457, 0.462097, -5, 10, 5)
@@ -29,7 +54,6 @@ shadow_enabled = true
 
 [node name="Moon" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.774519, -0.369599, 0.513339, -0.158494, 0.672257, 0.723153, -0.612372, -0.641457, 0.462097, -5, 10, 5)
-visible = false
 shadow_enabled = true
 sky_mode = 1
 
