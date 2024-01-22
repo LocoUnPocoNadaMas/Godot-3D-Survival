@@ -4,7 +4,6 @@ namespace GodotSurvival.Assets.Scripts;
 
 public partial class Player : CharacterBody3D
 {
-    private Camera3D _camera3D;
     private Node3D _head;
 
     [ExportCategory("Movement")]
@@ -12,7 +11,6 @@ public partial class Player : CharacterBody3D
     [Export] private float _jumpForce = 5f;
     
     private float _gravity = 9.8f;
-
 
     [ExportCategory("View Rotation")]
     [Export(PropertyHint.Range, "-1f,0f,0.1f")]
