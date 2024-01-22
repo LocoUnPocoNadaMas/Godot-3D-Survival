@@ -7,31 +7,37 @@ public partial class Need : Node
     private float _value;
     [Export] private float _maxValue;
     [Export] private float _startValue;
-    [Export] private float _regenValue;
+    [Export] private float _regenRate;
     [Export] private float _decayRate;
     private NeedBar _needBar;
+
+    public float Value => _value;
+    public float DecayRate => _decayRate;
+    public float RegenRate => _regenRate;
+
 
     public override void _Ready()
     {
         _needBar = GetNode<NeedBar>("NeedBar");
+        _value = _startValue;
     }
 
-    private void Add(float amount)
+    public void Add(float amount)
     {
-        _value += amount;
-        if (_value > _maxValue)
+        _value = Value + amount;
+        if (Value > _maxValue)
             _value = _maxValue;
     }
 
-    private void Subtract(float amount)
+    public void Subtract(float amount)
     {
-        _value -= amount;
-        if (_value < 0)
+        _value = Value - amount;
+        if (Value < 0)
             _value = 0;
     }
 
-    private void UpdateProgressBar()
+    public void UpdateProgressBar()
     {
-        _needBar.UpdateValue(_value, _maxValue);
+        _needBar.UpdateValue(Value, _maxValue);
     }
 }

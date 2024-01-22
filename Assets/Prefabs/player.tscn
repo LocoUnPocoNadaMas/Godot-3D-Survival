@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckp87ltvhpeov"]
+[gd_scene load_steps=6 format=3 uid="uid://ckp87ltvhpeov"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Player.cs" id="1_frbqx"]
+[ext_resource type="Script" path="res://Assets/Scripts/NeedHub.cs" id="2_0e5d1"]
 [ext_resource type="PackedScene" uid="uid://fg4vhyptv6c3" path="res://Assets/Prefabs/need.tscn" id="2_bww2g"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1dpeb"]
@@ -21,45 +22,57 @@ shape = SubResource("CapsuleShape3D_w5jjs")
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 
-[node name="Control" type="Control" parent="."]
+[node name="NeedHub" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("2_0e5d1")
 
-[node name="Health" parent="Control" instance=ExtResource("2_bww2g")]
+[node name="Health" parent="NeedHub" instance=ExtResource("2_bww2g")]
+_maxValue = 100.0
+_startValue = 100.0
+_regenRate = 0.01
 
-[node name="NeedBar" parent="Control/Health" index="0"]
+[node name="NeedBar" parent="NeedHub/Health" index="0"]
 _color = Color(1, 0, 0, 1)
 
-[node name="Thirth" parent="Control" instance=ExtResource("2_bww2g")]
+[node name="Thirst" parent="NeedHub" instance=ExtResource("2_bww2g")]
+_maxValue = 100.0
+_startValue = 80.0
+_decayRate = 2.0
 
-[node name="NeedBar" parent="Control/Thirth" index="0"]
+[node name="NeedBar" parent="NeedHub/Thirst" index="0"]
 offset_left = 19.0
 offset_top = 82.0
 offset_right = 319.0
 offset_bottom = 127.0
 _color = Color(0.258824, 0.478431, 1, 1)
 
-[node name="Hunger" parent="Control" instance=ExtResource("2_bww2g")]
+[node name="Hunger" parent="NeedHub" instance=ExtResource("2_bww2g")]
+_maxValue = 100.0
+_startValue = 90.0
+_decayRate = 0.2
 
-[node name="NeedBar" parent="Control/Hunger" index="0"]
+[node name="NeedBar" parent="NeedHub/Hunger" index="0"]
 offset_left = 19.0
 offset_top = 154.0
 offset_right = 319.0
 offset_bottom = 199.0
 _color = Color(0.886275, 0.345098, 0.180392, 1)
 
-[node name="Sleep" parent="Control" instance=ExtResource("2_bww2g")]
+[node name="Sleep" parent="NeedHub" instance=ExtResource("2_bww2g")]
+_maxValue = 100.0
+_regenRate = 1.0
 
-[node name="NeedBar" parent="Control/Sleep" index="0"]
+[node name="NeedBar" parent="NeedHub/Sleep" index="0"]
 offset_left = 21.0
 offset_top = 222.0
 offset_right = 321.0
 offset_bottom = 267.0
 _color = Color(1, 0.482353, 1, 1)
 
-[editable path="Control/Health"]
-[editable path="Control/Thirth"]
-[editable path="Control/Hunger"]
-[editable path="Control/Sleep"]
+[editable path="NeedHub/Health"]
+[editable path="NeedHub/Thirst"]
+[editable path="NeedHub/Hunger"]
+[editable path="NeedHub/Sleep"]

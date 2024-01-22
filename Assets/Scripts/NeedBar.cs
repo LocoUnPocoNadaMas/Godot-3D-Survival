@@ -18,7 +18,7 @@ public partial class NeedBar : ProgressBar
 
     public void UpdateValue(float newValue, float max)
     {
-        _maxValue = max;
-        _value = newValue;
+        MaxValue = max;
+        Value = newValue;
     }
 }
