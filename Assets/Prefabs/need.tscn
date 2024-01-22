@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://fg4vhyptv6c3"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Need.cs" id="1_enk3u"]
+[ext_resource type="Script" path="res://Assets/Scripts/NeedBar.cs" id="2_ma6ds"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cl2p0"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="Need" type="Node"]
+script = ExtResource("1_enk3u")
+
+[node name="NeedBar" type="ProgressBar" parent="."]
+offset_left = 20.0
+offset_top = 16.0
+offset_right = 320.0
+offset_bottom = 61.0
+theme_override_styles/background = SubResource("StyleBoxFlat_cl2p0")
+value = 50.0
+show_percentage = false
+script = ExtResource("2_ma6ds")
